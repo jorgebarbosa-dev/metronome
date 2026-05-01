@@ -8,7 +8,8 @@
 ## Milestones
 
 - ✅ **v1.0 MVP** — Phases 1-4 (shipped 2026-05-01)
-- 🚧 **v1.1 Training Modes** — Phases 5-6 (in planning)
+- ✅ **v1.1 Training Modes** — Phases 5-6 (shipped 2026-05-01)
+- 🚧 **v1.2 Native Mobile** — Phase 7 (in planning)
 
 ## Phases
 
@@ -137,6 +138,34 @@
 
 ---
 
+## v1.2 Native Mobile (Phase 7)
+
+### Phase 7: Native Mobile UI
+
+**Goal:** Interface com aparência e comportamento de aplicativo nativo mobile
+**Requirements:** MOB-01 to MOB-08
+**Depends on:** Phase 4 (PWA & Polish)
+**Plans:** 6 plans in 5 waves
+
+- [ ] `07-01-PLAN.md` — Foundation: viewport, CSS utilities, touch hooks (Wave 1)
+- [ ] `07-02-PLAN.md` — Design system primitives: ControlButton, SegmentedControl, BottomSheet, Slider (Wave 1)
+- [ ] `07-03-PLAN.md` — Core visual components: PlayButton, BeatIndicator, BpmDisplay (Wave 2)
+- [ ] `07-04-PLAN.md` — Main layout: PlayerView, Header, App.tsx rewrite (Wave 3)
+- [ ] `07-05-PLAN.md` — Settings, Training & Sheet content (Wave 4)
+- [ ] `07-06-PLAN.md` — Fullscreen update, accessibility & verification (Wave 5)
+
+**Success Criteria:**
+1. App fills entire screen edge-to-edge on mobile (no floating card layout)
+2. Dark mode is enforced/optimized for mobile
+3. Touch targets meet minimum 56px for secondary, 88px for primary actions
+4. Controls are positioned within thumb reach (bottom-oriented)
+5. Gestures work: swipe to adjust BPM, tap to play/pause
+6. Animations feel native (spring physics, pulse ring on beat)
+7. Safe areas respected (notch, home indicator)
+8. No hover-dependent interactions on touch devices
+
+---
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -147,13 +176,15 @@
 | 4. PWA & Polish | v1.0 | 2/2 | ✅ Complete | 2026-05-01 |
 | 5. Training Engine | v1.1 | 3/3 | ✅ Complete | 2026-05-01 |
 | 6. Training UI & Fullscreen | v1.1 | 2/2 | ✅ Complete | 2026-05-01 |
+| 7. Native Mobile UI | v1.2 | 0/0 | 🚧 Planning | — |
 
-**Total:** 6 phases | 31 requirements shipped | 13 v1.1 requirements planned
+**Total:** 7 phases | 31 requirements shipped | 13 v1.1 requirements planned | 8 v1.2 requirements planned
 
 ## Notes
 
 - Phase order reflects technical dependencies: audio engine must be solid before visual polish
 - PWA can technically be built in parallel but is placed last as final polish
 - v1.1 focuses on training modes (auto-BPM, count-in, silence) and fullscreen UX
+- v1.2 focuses on native mobile experience (full-screen layout, gestures, native feel)
 - Setlists, polyrhythms, and swing remain deferred to v2.0
 - Milestone archives available at `.planning/milestones/v1.0-ROADMAP.md` and `.planning/milestones/v1.1-ROADMAP.md`
