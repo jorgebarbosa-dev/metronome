@@ -147,7 +147,7 @@
 **Depends on:** Phase 4 (PWA & Polish)
 **Plans:** 6 plans in 5 waves
 
-- [ ] `07-01-PLAN.md` — Foundation: viewport, CSS utilities, touch hooks (Wave 1)
+- [x] `07-01-PLAN.md` — Foundation: viewport, CSS utilities, touch hooks (Wave 1) (2026-05-01)
 - [ ] `07-02-PLAN.md` — Design system primitives: ControlButton, SegmentedControl, BottomSheet, Slider (Wave 1)
 - [ ] `07-03-PLAN.md` — Core visual components: PlayButton, BeatIndicator, BpmDisplay (Wave 2)
 - [ ] `07-04-PLAN.md` — Main layout: PlayerView, Header, App.tsx rewrite (Wave 3)
@@ -176,7 +176,7 @@
 | 4. PWA & Polish | v1.0 | 2/2 | ✅ Complete | 2026-05-01 |
 | 5. Training Engine | v1.1 | 3/3 | ✅ Complete | 2026-05-01 |
 | 6. Training UI & Fullscreen | v1.1 | 2/2 | ✅ Complete | 2026-05-01 |
-| 7. Native Mobile UI | v1.2 | 0/0 | 🚧 Planning | — |
+| 7. Native Mobile UI | v1.2 | 1/6 | 🚧 In Progress | 2026-05-01 |
 
 **Total:** 7 phases | 31 requirements shipped | 13 v1.1 requirements planned | 8 v1.2 requirements planned
 
