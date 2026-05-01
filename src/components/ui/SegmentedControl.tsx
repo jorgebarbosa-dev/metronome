@@ -1,11 +1,11 @@
-interface SegmentedControlProps<T extends string> {
+interface SegmentedControlProps<T> {
   options: { value: T; label: string }[];
   value: T;
   onChange: (value: T) => void;
   ariaLabel: string;
 }
 
-export function SegmentedControl<T extends string>({
+export function SegmentedControl<T>({
   options,
   value,
   onChange,
@@ -19,7 +19,7 @@ export function SegmentedControl<T extends string>({
     >
       {options.map((option) => (
         <button
-          key={option.value}
+          key={option.label}
           role="radio"
           aria-checked={value === option.value}
           onClick={() => onChange(option.value)}
