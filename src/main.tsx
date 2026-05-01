@@ -15,6 +15,12 @@ registerSW({
   }
 })
 
+// Force dark mode on mobile for native feel
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+if (isMobile) {
+  document.documentElement.classList.add('dark');
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
