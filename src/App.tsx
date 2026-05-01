@@ -69,7 +69,7 @@ function MetronomeApp() {
         Time signature: {state.timeSignature.beats}/{state.timeSignature.beatValue}
       </div>
 
-      <BpmDisplay bpm={state.bpm} />
+      <BpmDisplay />
 
       <BeatNumberDisplay />
 
