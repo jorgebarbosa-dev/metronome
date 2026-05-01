@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  base: '/metronome/',
   plugins: [
     react(),
     VitePWA({
@@ -15,8 +16,8 @@ export default defineConfig({
         theme_color: '#1f2937',
         background_color: '#1f2937',
         display: 'standalone',
-        scope: '/',
-        start_url: '/',
+        scope: '/metronome/',
+        start_url: '/metronome/',
         orientation: 'portrait',
         icons: [
           {
