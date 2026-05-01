@@ -2,7 +2,7 @@
 
 **Project:** Metrônomo Web
 **Initialized:** Thu Apr 30 2026
-**Current Phase:** Milestone v1.1 Training Modes — Phase 6 Complete
+**Current Phase:** Phase 7 — Native Mobile UI (in progress)
 
 ## Progress
 
@@ -21,6 +21,7 @@
 | 4 — PWA & Polish | ✅ Complete | 3 | 3/3 |
 | 5 — Training Engine | ✅ Complete | 8 | 8/8 |
 | 6 — Training UI & Fullscreen | ✅ Complete | 5 | 5/5 |
+| 7 — Native Mobile UI | ◆ In Progress | 8 | 0/8 |
 
 ## Project Reference
 
