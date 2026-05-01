@@ -21,15 +21,10 @@ export function FullscreenView() {
     <div
       role="main"
       aria-label="Fullscreen metronome view"
-      className="min-h-screen flex flex-col items-center justify-center bg-black text-white p-4 md:p-8 gap-6 md:gap-8 select-none"
+      className="h-[100dvh] w-[100dvw] flex flex-col items-center justify-center bg-neutral-950 text-white p-4 md:p-8 gap-6 md:gap-8 select-none overflow-hidden"
     >
-      {/* ARIA live region for screen readers */}
-      <div
-        className="sr-only"
-        role="status"
-        aria-live="polite"
-        aria-atomic="true"
-      >
+      {/* ARIA live region */}
+      <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
         {isPlaying
           ? `BPM ${state.bpm}, beat ${currentBeat} of ${state.timeSignature.beats}`
           : 'Metronome stopped'}
@@ -37,24 +32,24 @@ export function FullscreenView() {
 
       {/* Top section — Time signature and mode badges */}
       <div className="flex flex-col items-center gap-3">
-        <div className="text-3xl md:text-4xl font-bold tabular-nums">
+        <div className="text-3xl md:text-4xl font-bold tabular-nums text-white">
           {timeSignatureText}
         </div>
 
         {hasTrainingModes && (
           <div className="flex items-center gap-2">
             {trainingConfig.autoBpm.enabled && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border border-blue-400 text-blue-300">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border border-blue-400/30 text-blue-400">
                 Auto-BPM
               </span>
             )}
             {trainingConfig.countIn.enabled && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border border-green-400 text-green-300">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border border-green-400/30 text-green-400">
                 Count-In
               </span>
             )}
             {trainingConfig.silence.enabled && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border border-amber-400 text-amber-300">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border border-amber-400/30 text-amber-400">
                 Silence
               </span>
             )}
@@ -62,65 +57,80 @@ export function FullscreenView() {
         )}
       </div>
 
-      {/* Center section — Large beat indicator */}
-      <div
-        className={`
-          w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96
-          rounded-full flex items-center justify-center
-          transition-all duration-100
-          ${
-            isBeatActive
+      {/* Center section — Large beat indicator with pulse ring */}
+      <div className="relative flex items-center justify-center">
+        {/* Pulse ring */}
+        {isBeatActive && (
+          <div
+            key={`fs-pulse-${currentBeat}`}
+            className={`
+              absolute w-[340px] h-[340px] md:w-[420px] md:h-[420px] lg:w-[500px] lg:h-[500px]
+              rounded-full border-2 pointer-events-none
+              ${isBeatOne ? 'border-red-500/30' : 'border-blue-500/30'}
+              animate-pulse-ring
+            `}
+            aria-hidden="true"
+          />
+        )}
+
+        {/* Beat circle */}
+        <div
+          className={`
+            w-[280px] h-[280px] md:w-[360px] md:h-[360px] lg:w-[440px] lg:h-[440px]
+            rounded-full flex items-center justify-center
+            transition-all duration-150 spring-bounce
+            ${isBeatActive
               ? isBeatOne
-                ? 'bg-red-500 ring-8 ring-white/30 scale-110'
-                : 'bg-blue-500 ring-8 ring-white/30 scale-110'
-              : 'bg-gray-800 scale-100'
-          }
-        `}
-        aria-hidden="true"
-      >
-        <span className="text-6xl md:text-8xl font-bold text-white">
-          {isPlaying ? currentBeat : '-'}
-        </span>
+                ? 'bg-red-600 scale-110 shadow-[0_0_80px_rgba(220,38,38,0.25)]'
+                : 'bg-blue-600 scale-110 shadow-[0_0_80px_rgba(59,130,246,0.25)]'
+              : 'bg-neutral-800 scale-100'
+            }
+          `}
+          aria-hidden="true"
+        >
+          <span className="text-8xl md:text-9xl font-bold text-white tabular-nums">
+            {isPlaying ? currentBeat : '—'}
+          </span>
+        </div>
       </div>
 
       {/* BPM display */}
       <div className="flex flex-col items-center gap-1">
-        <div className="text-7xl md:text-9xl font-bold tabular-nums">
+        <div className="text-7xl md:text-9xl font-bold tabular-nums bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-transparent">
           {state.bpm}
         </div>
-        <div className="text-xl md:text-2xl text-gray-400">BPM</div>
+        <div className="text-xl md:text-2xl text-white/30 font-medium uppercase tracking-[0.2em]">BPM</div>
       </div>
 
       {/* Bottom section — Controls */}
       <div className="flex items-center gap-4 md:gap-6">
-        {/* Play/Pause button */}
         <button
           onClick={() => dispatch({ type: 'TOGGLE_PLAY' })}
           aria-label={isPlaying ? 'Pause metronome' : 'Start metronome'}
           aria-pressed={isPlaying}
           className={`
-            w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center
-            transition-all duration-150 active:scale-95
-            focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500
-            ${
-              isPlaying
-                ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                : 'bg-gray-700 hover:bg-gray-600 text-white'
+            w-[88px] h-[88px] md:w-32 md:h-32 rounded-full
+            flex items-center justify-center
+            transition-transform duration-150 active:scale-[0.88] spring-bounce
+            focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/50
+            ${isPlaying
+              ? 'bg-red-500 shadow-[0_8px_32px_rgba(239,68,68,0.35)]'
+              : 'bg-blue-500 shadow-[0_8px_32px_rgba(59,130,246,0.35)]'
             }
+            [@media(hover:hover)]:hover:brightness-110
           `}
         >
           {isPlaying ? (
-            <Pause className="w-10 h-10 md:w-12 md:h-12" aria-hidden="true" />
+            <Pause className="w-8 h-8 md:w-12 md:h-12 text-white" aria-hidden="true" />
           ) : (
-            <Play className="w-10 h-10 md:w-12 md:h-12 ml-1" aria-hidden="true" />
+            <Play className="w-8 h-8 md:w-12 md:h-12 text-white ml-0.5" aria-hidden="true" />
           )}
         </button>
 
-        {/* Exit fullscreen button */}
         <button
           onClick={toggleFullscreen}
           aria-label="Exit fullscreen"
-          className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-gray-700 hover:bg-gray-600 text-white transition-all duration-150 active:scale-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500"
+          className="w-14 h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-white/[0.06] text-white/70 active:scale-90 transition-transform [@media(hover:hover)]:hover:bg-white/[0.10]"
         >
           <Minimize className="w-6 h-6 md:w-8 md:h-8" aria-hidden="true" />
         </button>
@@ -128,9 +138,9 @@ export function FullscreenView() {
 
       {/* Training overlay */}
       {isTrainingActive && (
-        <div className="absolute top-4 left-4 bg-gray-900/80 backdrop-blur-sm rounded-xl p-4 border border-gray-700">
+        <div className="absolute top-4 left-4 bg-neutral-900/90 backdrop-blur-sm rounded-2xl p-4 border border-white/[0.08]">
           <div className="flex flex-col gap-2">
-            <div className="font-mono text-xl text-gray-300 flex items-center gap-2">
+            <div className="font-mono text-xl text-white/70 flex items-center gap-2">
               <Clock className="w-4 h-4" aria-hidden="true" />
               <span className="text-white">
                 {Math.floor(trainingSession.elapsedTime / 60)}:{String(Math.floor(trainingSession.elapsedTime % 60)).padStart(2, '0')}
@@ -152,18 +162,11 @@ export function FullscreenView() {
             </span>
 
             {trainingConfig.autoBpm.enabled && (
-              <div className="text-sm text-gray-300">
-                <span className="text-gray-400">BPM: </span>
-                <span className="text-white font-mono">
-                  {trainingSession.autoBpmCurrentValue}
-                </span>
-                <span className="text-gray-400">
-                  {' '}
-                  {trainingConfig.autoBpm.direction === 'decrease' ? '←' : '→'}{' '}
-                </span>
-                <span className="text-white font-mono">
-                  {trainingConfig.autoBpm.targetBpm}
-                </span>
+              <div className="text-sm text-white/70">
+                <span className="text-white/40">BPM: </span>
+                <span className="text-white font-mono">{trainingSession.autoBpmCurrentValue}</span>
+                <span className="text-white/40">{' '}{trainingConfig.autoBpm.direction === 'decrease' ? '←' : '→'}{' '}</span>
+                <span className="text-white font-mono">{trainingConfig.autoBpm.targetBpm}</span>
               </div>
             )}
 
@@ -181,14 +184,12 @@ export function FullscreenView() {
 
             {trainingConfig.countIn.enabled &&
               trainingSession.phase === 'count-in' && (
-                <div className="text-sm text-gray-300">
-                  <span className="text-gray-400">Count-in: </span>
-                  <span className="text-white font-mono">
-                    {trainingSession.countInBarsRemaining}
-                  </span>
-                  <span className="text-gray-400"> bars left</span>
-                </div>
-              )}
+              <div className="text-sm text-white/70">
+                <span className="text-white/40">Count-in: </span>
+                <span className="text-white font-mono">{trainingSession.countInBarsRemaining}</span>
+                <span className="text-white/40"> bars left</span>
+              </div>
+            )}
           </div>
         </div>
       )}
