@@ -9,7 +9,7 @@
 
 - ✅ **v1.0 MVP** — Phases 1-4 (shipped 2026-05-01)
 - ✅ **v1.1 Training Modes** — Phases 5-6 (shipped 2026-05-01)
-- 🚧 **v1.2 Native Mobile** — Phase 7 (in planning)
+- ✅ **v1.2 Native Mobile** — Phase 7 (shipped 2026-05-01)
 
 ## Phases
 
@@ -152,7 +152,7 @@
 - [x] `07-03-PLAN.md` — Core visual components: PlayButton, BeatIndicator, BpmDisplay (Wave 2) (2026-05-01)
 - [x] `07-04-PLAN.md` — Main layout: PlayerView, Header, App.tsx rewrite (Wave 3) (2026-05-01)
 - [x] `07-05-PLAN.md` — Settings, Training & Sheet content (Wave 4) (2026-05-01)
-- [ ] `07-06-PLAN.md` — Fullscreen update, accessibility & verification (Wave 5)
+- [x] `07-06-PLAN.md` — Fullscreen update, accessibility & verification (Wave 5) (2026-05-01)
 
 **Success Criteria:**
 1. App fills entire screen edge-to-edge on mobile (no floating card layout)
@@ -176,7 +176,7 @@
 | 4. PWA & Polish | v1.0 | 2/2 | ✅ Complete | 2026-05-01 |
 | 5. Training Engine | v1.1 | 3/3 | ✅ Complete | 2026-05-01 |
 | 6. Training UI & Fullscreen | v1.1 | 2/2 | ✅ Complete | 2026-05-01 |
-| 7. Native Mobile UI | v1.2 | 5/6 | 🚧 In Progress | 2026-05-01 |
+| 7. Native Mobile UI | v1.2 | 6/6 | ✅ Complete | 2026-05-01 |
 
 **Total:** 7 phases | 31 requirements shipped | 13 v1.1 requirements planned | 8 v1.2 requirements planned
 
