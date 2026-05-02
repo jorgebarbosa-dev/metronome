@@ -10,6 +10,7 @@ import { BottomSheet } from './ui/BottomSheet';
 import { Header } from './Header';
 import { SettingsScreen } from './SettingsScreen';
 import { TrainingScreen } from './TrainingScreen';
+import { TrainingStatus } from './TrainingStatus';
 import { PresetsSheet } from './PresetsSheet';
 import { SoundSheet } from './SoundSheet';
 
@@ -51,6 +52,11 @@ export function PlayerView() {
       {/* Header zone */}
       <div className="shrink-0 pt-[calc(12px+env(safe-area-inset-top))] px-5">
         <Header onOpenSettings={() => setActiveSheet('settings')} />
+      </div>
+
+      {/* Training status */}
+      <div className="shrink-0 px-5">
+        <TrainingStatus />
       </div>
 
       {/* Center zone */}

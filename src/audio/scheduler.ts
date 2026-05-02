@@ -41,6 +41,8 @@ export function createScheduler(
   let silenceGainNode: GainNode | null = null;
   let playStartTime = 0;
   let timeoutIds: number[] = [];
+  let pendingBarBoundary = false;
+  let pendingBarBoundaryTime = 0;
 
   let config = {
     bpm: 120,
@@ -133,6 +135,14 @@ export function createScheduler(
     const ctx = audioEngine.context;
     const lookahead = 0.1; // 100ms
 
+    // Fire pending bar boundary callback when the first beat of next bar starts
+    if (pendingBarBoundary && trainingState && onBarBoundaryCallback) {
+      if (ctx.currentTime >= pendingBarBoundaryTime) {
+        onBarBoundaryCallback(trainingState.currentBar, trainingState);
+        pendingBarBoundary = false;
+      }
+    }
+
     while (nextNoteTime < ctx.currentTime + lookahead) {
       const subCount = getSubdivisionCount(config.subdivision);
       const secondsPerBeat = 60 / config.bpm;
@@ -188,7 +198,9 @@ export function createScheduler(
       if (wasLastBeat) {
         handleBarBoundary(nextNoteTime);
         if (trainingState && onBarBoundaryCallback) {
-          onBarBoundaryCallback(trainingState.currentBar, trainingState);
+          // Queue callback to fire on the first beat of the next bar
+          pendingBarBoundary = true;
+          pendingBarBoundaryTime = nextNoteTime;
         }
       }
     }
@@ -263,6 +275,8 @@ export function createScheduler(
       trainingState = null;
       onBarBoundaryCallback = undefined;
       trainingConfig = undefined;
+      pendingBarBoundary = false;
+      pendingBarBoundaryTime = 0;
       timeoutIds.forEach(id => clearTimeout(id));
       timeoutIds = [];
     },

@@ -147,16 +147,21 @@ export function MetronomeProvider({ children }: { children: React.ReactNode }) {
     if (!scheduler) return;
 
     if (state.isPlaying) {
+      // Determine if training modes are active
+      const hasTraining = training.config.autoBpm.enabled ||
+                          training.config.silence.enabled ||
+                          training.config.countIn.enabled;
+
       // Initialize training session state before starting
-      setTrainingSession(createInitialSessionState(training.config));
+      const initialSession = createInitialSessionState(training.config);
+      if (hasTraining) {
+        initialSession.isActive = true;
+        initialSession.currentBar = 1;
+      }
+      setTrainingSession(initialSession);
 
       audioEngineRef.current.resume().then(() => {
         const soundConfig = SOUND_PRESETS[state.selectedSound];
-
-        // Determine if training modes are active
-        const hasTraining = training.config.autoBpm.enabled ||
-                            training.config.silence.enabled ||
-                            training.config.countIn.enabled;
 
         scheduler.start(
           state.bpm,

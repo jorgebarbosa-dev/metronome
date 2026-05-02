@@ -3,8 +3,9 @@ import { useMetronome } from '../context/MetronomeContext';
 import { useSwipeBpm } from '../hooks/useSwipeBpm';
 
 export function BpmDisplay() {
-  const { state, dispatch } = useMetronome();
-  const bpm = state.bpm;
+  const { state, dispatch, trainingSession, trainingConfig } = useMetronome();
+  const isAutoBpmActive = trainingSession.isActive && trainingConfig.autoBpm.enabled;
+  const bpm = isAutoBpmActive ? trainingSession.autoBpmCurrentValue : state.bpm;
   const prevBpmRef = useRef(bpm);
   const isAnimatingRef = useRef(false);
 
@@ -28,7 +29,7 @@ export function BpmDisplay() {
     <div
       className="text-center select-none cursor-ew-resize touch-pan-y"
       role="status"
-      aria-label={`BPM: ${bpm}`}
+      aria-label={`BPM: ${bpm}${isAutoBpmActive ? ' (training)' : ''}`}
       aria-live="polite"
       aria-atomic="true"
       {...swipeHandlers}

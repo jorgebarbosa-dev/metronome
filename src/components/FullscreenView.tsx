@@ -16,6 +16,8 @@ export function FullscreenView() {
     trainingConfig.silence.enabled ||
     trainingConfig.countIn.enabled;
   const isTrainingActive = trainingSession.isActive;
+  const isAutoBpmActive = isTrainingActive && trainingConfig.autoBpm.enabled;
+  const displayBpm = isAutoBpmActive ? trainingSession.autoBpmCurrentValue : state.bpm;
 
   return (
     <div
@@ -26,7 +28,7 @@ export function FullscreenView() {
       {/* ARIA live region */}
       <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
         {isPlaying
-          ? `BPM ${state.bpm}, beat ${currentBeat} of ${state.timeSignature.beats}`
+          ? `BPM ${displayBpm}, beat ${currentBeat} of ${state.timeSignature.beats}`
           : 'Metronome stopped'}
       </div>
 
@@ -97,7 +99,7 @@ export function FullscreenView() {
       {/* BPM display */}
       <div className="flex flex-col items-center gap-1">
         <div className="text-7xl md:text-9xl font-bold tabular-nums bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-transparent">
-          {state.bpm}
+          {displayBpm}
         </div>
         <div className="text-xl md:text-2xl text-white/30 font-medium uppercase tracking-[0.2em]">BPM</div>
       </div>
