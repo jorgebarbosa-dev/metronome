@@ -8,10 +8,10 @@ export function SubdivisionSelector() {
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const subdivisions: { value: Subdivision; label: string; symbol: string; description: string }[] = [
-    { value: 'quarter', label: 'Quarter', symbol: '1', description: '1 click per beat' },
-    { value: 'eighth', label: 'Eighth', symbol: '2', description: '2 clicks per beat' },
-    { value: 'triplet', label: 'Triplet', symbol: '3', description: '3 clicks per beat' },
-    { value: 'sixteenth', label: 'Sixteenth', symbol: '4', description: '4 clicks per beat' },
+    { value: 'quarter', label: 'Quarter', symbol: '♩', description: '1 click per beat' },
+    { value: 'eighth', label: 'Eighth', symbol: '♪', description: '2 clicks per beat' },
+    { value: 'triplet', label: 'Triplet', symbol: '♩₃', description: '3 clicks per beat' },
+    { value: 'sixteenth', label: 'Sixteenth', symbol: '𝅗𝅥𝅮', description: '4 clicks per beat' },
   ];
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, index: number) => {

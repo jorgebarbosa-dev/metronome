@@ -14,10 +14,10 @@ const TIME_SIGNATURES: { value: TimeSignature; label: string }[] = [
 ];
 
 const SUBDIVISIONS: { value: Subdivision; label: string }[] = [
-  { value: 'quarter', label: '1/4' },
-  { value: 'eighth', label: '1/8' },
-  { value: 'triplet', label: '1/3' },
-  { value: 'sixteenth', label: '1/16' },
+  { value: 'quarter', label: '♩' },
+  { value: 'eighth', label: '♪' },
+  { value: 'triplet', label: '♩₃' },
+  { value: 'sixteenth', label: '𝅗𝅥𝅮' },
 ];
 
 export function SettingsScreen() {
