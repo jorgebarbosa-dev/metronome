@@ -70,34 +70,46 @@ export function TrainingScreen() {
               <TrendingUp className="w-4 h-4" />
             </ControlButton>
           </div>
-          <Slider
-            value={trainingConfig.autoBpm.startBpm}
-            min={40}
-            max={240}
-            onChange={(v) => trainingActions.updateAutoBpm({ startBpm: v })}
-            ariaLabel="Start BPM"
-          />
-          <Slider
-            value={trainingConfig.autoBpm.targetBpm}
-            min={40}
-            max={240}
-            onChange={(v) => trainingActions.updateAutoBpm({ targetBpm: v })}
-            ariaLabel="Target BPM"
-          />
-          <Slider
-            value={trainingConfig.autoBpm.increment}
-            min={1}
-            max={20}
-            onChange={(v) => trainingActions.updateAutoBpm({ increment: v })}
-            ariaLabel="Increment"
-          />
-          <Slider
-            value={trainingConfig.autoBpm.everyNBars}
-            min={1}
-            max={16}
-            onChange={(v) => trainingActions.updateAutoBpm({ everyNBars: v })}
-            ariaLabel="Every N bars"
-          />
+          <div>
+            <span className="text-xs font-semibold text-white/40 uppercase tracking-wider">Start BPM</span>
+            <Slider
+              value={trainingConfig.autoBpm.startBpm}
+              min={40}
+              max={240}
+              onChange={(v) => trainingActions.updateAutoBpm({ startBpm: v })}
+              ariaLabel="Start BPM"
+            />
+          </div>
+          <div>
+            <span className="text-xs font-semibold text-white/40 uppercase tracking-wider">Target BPM</span>
+            <Slider
+              value={trainingConfig.autoBpm.targetBpm}
+              min={40}
+              max={240}
+              onChange={(v) => trainingActions.updateAutoBpm({ targetBpm: v })}
+              ariaLabel="Target BPM"
+            />
+          </div>
+          <div>
+            <span className="text-xs font-semibold text-white/40 uppercase tracking-wider">Increment</span>
+            <Slider
+              value={trainingConfig.autoBpm.increment}
+              min={1}
+              max={20}
+              onChange={(v) => trainingActions.updateAutoBpm({ increment: v })}
+              ariaLabel="Increment"
+            />
+          </div>
+          <div>
+            <span className="text-xs font-semibold text-white/40 uppercase tracking-wider">Every N Bars</span>
+            <Slider
+              value={trainingConfig.autoBpm.everyNBars}
+              min={1}
+              max={16}
+              onChange={(v) => trainingActions.updateAutoBpm({ everyNBars: v })}
+              ariaLabel="Every N bars"
+            />
+          </div>
         </div>
       )}
 
@@ -111,6 +123,7 @@ export function TrainingScreen() {
 
       {trainingConfig.countIn.enabled && (
         <div className="pl-8">
+          <span className="text-xs font-semibold text-white/40 uppercase tracking-wider">Count-In Measures</span>
           <Slider
             value={trainingConfig.countIn.measures}
             min={1}
@@ -131,20 +144,26 @@ export function TrainingScreen() {
 
       {trainingConfig.silence.enabled && (
         <div className="flex flex-col gap-3 pl-8">
-          <Slider
-            value={trainingConfig.silence.playBars}
-            min={1}
-            max={16}
-            onChange={(v) => trainingActions.updateSilence({ playBars: v })}
-            ariaLabel="Play bars"
-          />
-          <Slider
-            value={trainingConfig.silence.silenceBars}
-            min={1}
-            max={16}
-            onChange={(v) => trainingActions.updateSilence({ silenceBars: v })}
-            ariaLabel="Silence bars"
-          />
+          <div>
+            <span className="text-xs font-semibold text-white/40 uppercase tracking-wider">Play Bars</span>
+            <Slider
+              value={trainingConfig.silence.playBars}
+              min={1}
+              max={16}
+              onChange={(v) => trainingActions.updateSilence({ playBars: v })}
+              ariaLabel="Play bars"
+            />
+          </div>
+          <div>
+            <span className="text-xs font-semibold text-white/40 uppercase tracking-wider">Silence Bars</span>
+            <Slider
+              value={trainingConfig.silence.silenceBars}
+              min={1}
+              max={16}
+              onChange={(v) => trainingActions.updateSilence({ silenceBars: v })}
+              ariaLabel="Silence bars"
+            />
+          </div>
         </div>
       )}
 
